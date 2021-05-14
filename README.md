@@ -1,4 +1,4 @@
-# laravel_enviroment
+# laravel_tasks
 
 ## 開発環境
 - PHP 8.0
