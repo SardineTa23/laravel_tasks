@@ -1,41 +1,25 @@
-# laravel_enviroment
+version: "3.8"
+services:
+  app:
+    build: ./infra/php
+    volumes:
+      - ./backend:/work
+  
+  web:
+      image: nginx:1.18-alpine
+      ports:
+      - 10080:80
+      volumes:
+      - ./backend:/work
+      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      working_dir: /work
 
-## 開発環境
-- PHP 8.0
-- Laravel Framework 8.41.0
-- niginx 1.18.0
-- MySQL 8.0.25
-- docker
-- docker-compose 3.8
-
-
-## get started
-
-
-#### クローンする
-```
-$ git clone https://github.com/k-iwashita-prtimes/posts_app.git
-```
-
-#### cloneしたディレクト配下へcdした後、dockerをbuild, upする。
-```
-$ doker compse build
-$ docker compose up -d 
-```
-
-#### dockerコンテナの中で、必要なファイルの生成, migrationを行う
-```
-$ docker compose exec app bash
-$ composer install
-$ cp .env.example .env
-$ php artisan key:generate
-$ php artisan migrate
-$ exit 
-```
-
-#### http://127.0.0.1:10080/  へ接続する。
-
-
-#### ※MySQLに接続したい時
-```
-$ docker-compose exec db bash -c 'mysql -u${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE}'
+  db:
+    build: ./infra/mysql
+    volumes:
+      - db-store:/var/lib/mysql
+    ports:
+      - 33060:3306
+  
+volumes:
+  db-store:
