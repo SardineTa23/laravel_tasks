@@ -111,6 +111,7 @@
       <path value="$PROJECT_DIR$/backend/vendor/symfony/console" />
       <path value="$PROJECT_DIR$/backend/vendor/sebastian/comparator" />
       <path value="$PROJECT_DIR$/backend/vendor/symfony/polyfill-iconv" />
+      <path value="" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
